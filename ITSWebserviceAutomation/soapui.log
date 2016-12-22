@@ -1,0 +1,53 @@
+2016-12-21 17:06:48,236 WARN  [SoapUI] Missing folder [C:\Workspace\rmm-qa-automation-scripts\ContinuumAutomation\ITSWebserviceAutomation\ext] for external libraries
+2016-12-21 17:06:48,499 INFO  [DefaultSoapUICore] initialized soapui-settings from [C:\Users\sneha.chemburkar\soapui-settings.xml]
+2016-12-21 17:06:49,144 INFO  [PluginManager] 0 plugins loaded in 1 ms
+2016-12-21 17:06:49,144 INFO  [DefaultSoapUICore] All plugins loaded
+2016-12-21 17:06:49,889 INFO  [WsdlProject] Loaded project from [file:/C:/Workspace/rmm-qa-automation-scripts/ContinuumAutomation/ITSWebserviceAutomation/src/test/ReadyAPIProjectFiles/IT-Glue-API-ALL-soapui-project.xml]
+2016-12-21 17:06:49,952 INFO  [WsdlProject] Loaded project from [file:/C:/Workspace/rmm-qa-automation-scripts/ContinuumAutomation/ITSWebserviceAutomation/src/test/ReadyAPIProjectFiles/IT-Glue-API-ALL-soapui-project.xml]
+2016-12-21 17:06:49,956 INFO  [SoapUITestCaseRunner] Running SoapUI tests in project [IT Glue API ALL]
+2016-12-21 17:06:49,956 INFO  [SoapUITestCaseRunner] Running TestCase [ITGlue PRE]
+2016-12-21 17:06:49,987 INFO  [SoapUITestCaseRunner] Running SoapUI testcase [ITGlue PRE]
+2016-12-21 17:06:50,000 INFO  [SoapUITestCaseRunner] running step [API ALL]
+2016-12-21 17:06:52,801 INFO  [SoapUITestCaseRunner] Assertion [JsonPath Count] has status FAILED
+2016-12-21 17:06:52,801 ERROR [SoapUITestCaseRunner] ASSERTION FAILED -> Assertion failed for path [$..machineID] : IllegalArgumentException:Invalid JSON: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+      <title>404 - File or directory not found.</title>
+      <style type="text/css">
+         <!--body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+fieldset{padding:0 15px 10px 15px;} 
+h1{font-size:2.4em;margin:0;color:#FFF;}
+h2{font-size:1.7em;margin:0;color:#CC0000;} 
+h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+background-color:#555555;}
+#content{margin:0 0 0 2%;position:relative;}
+.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}-->
+      </style>
+   </head>
+   <body>
+      <div id="header">
+         <h1>Server Error</h1>
+      </div>
+      <div id="content">
+         <div class="content-container">
+            <fieldset>
+               <h2>404 - File or directory not found.</h2>
+               <h3>The resource you are looking for might have been removed, had its name changed, or is temporarily unavailable.</h3>
+            </fieldset>
+         </div>
+      </div>
+   </body>
+</html>
+2016-12-21 17:06:52,802 ERROR [SoapUITestCaseRunner] API ALL failed, exporting to [C:\Workspace\rmm-qa-automation-scripts\ContinuumAutomation\ITSWebserviceAutomation\target\surefire-reports\ITGlue-ITGlue_PRE-API_ALL-0-FAILED.txt]
+2016-12-21 17:06:52,811 INFO  [SoapUITestCaseRunner] Finished running SoapUI testcase [ITGlue PRE], time taken: 2395ms, status: FAILED
+2016-12-21 17:06:52,812 INFO  [SoapUITestCaseRunner] TestCase [ITGlue PRE] finished with status [FAILED] in 2395ms
+2016-12-21 17:06:52,852 INFO  [WsdlProject] Loaded project from [file:/C:/Workspace/rmm-qa-automation-scripts/ContinuumAutomation/ITSWebserviceAutomation/src/test/ReadyAPIProjectFiles/IT-Glue-API-ALL-soapui-project.xml]
+2016-12-21 17:06:52,854 INFO  [SoapUITestCaseRunner] Running SoapUI tests in project [IT Glue API ALL]
+2016-12-21 17:06:52,854 INFO  [SoapUITestCaseRunner] Running TestCase [ITGlue Live]
+2016-12-21 17:06:52,854 INFO  [SoapUITestCaseRunner] Running SoapUI testcase [ITGlue Live]
+2016-12-21 17:06:52,854 INFO  [SoapUITestCaseRunner] running step [Device - API ALL]
+2016-12-21 17:06:53,724 INFO  [SoapUITestCaseRunner] Assertion [Not Contains] has status VALID
+2016-12-21 17:06:53,724 INFO  [SoapUITestCaseRunner] Finished running SoapUI testcase [ITGlue Live], time taken: 857ms, status: FINISHED
+2016-12-21 17:06:53,725 INFO  [SoapUITestCaseRunner] TestCase [ITGlue Live] finished with status [FINISHED] in 857ms
