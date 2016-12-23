@@ -1,9 +1,0 @@
-continuum\TestRailIntegrator.class
-continuum\SoapUIDriver.class
-continuum\UpdateResultsToTestRail.class
-continuum\TestRailAPIException.class
-continuum\HtmlEmailSender.class
-continuum\HtmlEmailSender$1.class
-continuum\TestRailAPIClient.class
-continuum\SoapUIIntegrator.class
-continuum\Utility.class
