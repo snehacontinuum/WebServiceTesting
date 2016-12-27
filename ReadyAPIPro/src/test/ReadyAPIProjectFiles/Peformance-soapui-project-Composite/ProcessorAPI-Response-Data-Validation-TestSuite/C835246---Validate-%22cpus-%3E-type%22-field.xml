@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="c1a97036-ec59-467d-a50e-8d2ab7d4098a" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="C835246 - Validate &quot;cpus > type&quot; field" searchProperties="true" timeout="0" maxResults="0" xmlns:con="http://eviware.com/soapui/config"><con:description>TestCase generated for REST Resource [Processor] located at [/performance/v1/endpoint/{machineId}/processor]</con:description><con:settings><con:setting id="c1a97036-ec59-467d-a50e-8d2ab7d4098afileName">C835246---Validate-%22cpus-%3E-type%22-field</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="restrequest" name="Step1_GetProcessorPerformance_Request" id="0fd942c2-9b78-4624-931b-1a0c7db22ffd"><con:settings/><con:config service="ProcessorAPI" resourcePath="/performance/v1/endpoint/{machineId}/processor" methodName="GET - GetProcessorPerfByMachineId" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Step1_GetProcessorPerformance_Request" id="d14a6b99-540e-4de8-90b7-f16136c412b4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#ServerHost}</con:endpoint><con:request/><con:originalUri>http://localhost/performance/v1/endpoint/1/processor</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="d4b2d433-b4b6-42fd-9ff8-c964d39a7fd3" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/><con:parameterOrder><con:entry>machineId</con:entry></con:parameterOrder><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="7021bd04-bcf4-458e-b990-05d6a8a5d6e1"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Step2_Validate_cpus.type_Field" id="898683b3-69fe-494f-a873-0db50d570097"><con:settings/><con:config><script>import groovy.json.JsonSlurper
+
+def response = context.expand('${Step1_GetProcessorPerformance_Request#Response}')
+def jsonResponse = new JsonSlurper().parseText(response)
+
+assert jsonResponse.size() > 0, "Response is empty"
+for (int i = 0; i &lt; jsonResponse.size(); i++) {
+	def jsonObj = jsonResponse[i]
+	assert jsonObj.containsKey("cpus"), "cpus not found in response"
+	def cpusJsonArr = jsonObj.cpus
+
+	assert cpusJsonArr.size() > 0, "cpus array in response is empty"
+	for (int j = 0; j &lt; cpusJsonArr.size(); j++) {
+			assert cpusJsonArr[j].containsKey("type"), "cpus > type not found"
+			def cpusType = cpusJsonArr[j].type
+			assert cpusType != null, "cpus > type is null"
+			assert cpusType == "performanceProcessor1", "cpus > type field is not 'performanceProcessor'"
+		}
+	}</script></con:config></con:testStep><con:properties/><con:reportParameters/><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

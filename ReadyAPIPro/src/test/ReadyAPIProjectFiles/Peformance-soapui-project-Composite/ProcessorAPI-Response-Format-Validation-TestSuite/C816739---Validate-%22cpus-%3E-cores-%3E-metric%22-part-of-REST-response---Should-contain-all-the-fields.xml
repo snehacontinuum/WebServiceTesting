@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="7a0bfa9c-9b6d-4621-a9c0-669eb2ee05a4" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="C816739 - Validate &quot;cpus > cores > metric&quot; part of REST response - Should contain all the fields" searchProperties="true" timeout="0" maxResults="0" xmlns:con="http://eviware.com/soapui/config"><con:description>TestCase generated for REST Resource [Processor] located at [/performance/v1/endpoint/{machineId}/processor]</con:description><con:settings><con:setting id="7a0bfa9c-9b6d-4621-a9c0-669eb2ee05a4fileName">C816739---Validate-%22cpus-%3E-cores-%3E-metric%22-part-of-REST-response---Should-contain-all-the-fields</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="restrequest" name="Step1_GetProcessorPerformance_Request" id="4910aaa3-c850-4f4b-b6ab-7bcc60ad8020"><con:settings/><con:config service="ProcessorAPI" resourcePath="/performance/v1/endpoint/{machineId}/processor" methodName="GET - GetProcessorPerfByMachineId" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Step1_GetProcessorPerformance_Request" id="d14a6b99-540e-4de8-90b7-f16136c412b4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#ServerHost}</con:endpoint><con:request/><con:originalUri>http://localhost/performance/v1/endpoint/1/processor</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="b3a881db-f913-4293-8eea-f252c8aa054e" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/><con:parameterOrder><con:entry>machineId</con:entry></con:parameterOrder><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="7021bd04-bcf4-458e-b990-05d6a8a5d6e1"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Step2_Validate_cpus_cores_metric_Field_Format" id="7363b419-4633-409c-b6d6-77bd07b8c1f9"><con:settings/><con:config><script>import groovy.json.JsonSlurper
+
+def response = context.expand('${Step1_GetProcessorPerformance_Request#Response}')
+def jsonResponse = new JsonSlurper().parseText(response)
+
+assert jsonResponse.size() > 0, "Response is empty"
+for (int i = 0; i &lt; jsonResponse.size(); i++) {
+	def jsonObj = jsonResponse[i]
+
+	assert jsonObj.containsKey("cpus"), "cpus not found in response"
+	def cpusJsonArr = jsonObj.cpus
+
+	for (int j = 0; j &lt; cpusJsonArr.size(); j++) {
+			assert cpusJsonArr[j].containsKey("cores"), "cores not found"
+			def coresJsonArr = cpusJsonArr[j].cores
+
+			assert coresJsonArr.size() > 0, "cores field is empty"
+			for (int k = 0; k &lt; coresJsonArr.size(); k++) {
+
+				assert coresJsonArr[k].containsKey("metric"), "metric not found in response"
+				def metricJsonObj = coresJsonArr[k].metric
+				assert metricJsonObj.containsKey("numOfProcesses"), "numOfProcesses not found"
+				assert metricJsonObj.containsKey("percentIOTime"), "percentIOTime not found"
+				assert metricJsonObj.containsKey("percentIdleTime"), "percentIdleTime not found"
+				assert metricJsonObj.containsKey("percentInterruptTime"), "percentInterruptTime not found"
+				assert metricJsonObj.containsKey("percentSystemTime"), "percentSystemTime not found"
+				assert metricJsonObj.containsKey("percentUserTime"), "percentUserTime not found"
+				assert metricJsonObj.containsKey("percentUtil"), "percentUtil not found"
+				assert metricJsonObj.containsKey("interruptsPerSec"), "interruptsPerSec not found"
+				}
+		}
+	}</script></con:config></con:testStep><con:properties/><con:reportParameters/><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

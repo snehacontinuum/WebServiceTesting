@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:soapui-listeners xmlns:tns="http://eviware.com/soapui/config">
+
+<tns:listener id="testRunListener" listenerClass="net.continuum.ws.listeners.CustomTestRunListener"
+   listenerInterface="com.eviware.soapui.model.testsuite.TestRunListener" />
+<tns:listener id="testSuiteRunListener" listenerClass="net.continuum.ws.listeners.CustomTestSuiteRunListener"
+   listenerInterface="com.eviware.soapui.model.testsuite.TestSuiteRunListener" />
+</tns:soapui-listeners>

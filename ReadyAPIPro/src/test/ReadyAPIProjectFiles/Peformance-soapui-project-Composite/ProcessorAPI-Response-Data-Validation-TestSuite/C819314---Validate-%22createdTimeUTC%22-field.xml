@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="8cc0954c-0a94-4301-b744-7c1e5c90e000" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="C819314 - Validate &quot;createdTimeUTC&quot; field" searchProperties="true" timeout="0" maxResults="0" xmlns:con="http://eviware.com/soapui/config"><con:description>TestCase generated for REST Resource [Processor] located at [/performance/v1/endpoint/{machineId}/processor]</con:description><con:settings><con:setting id="8cc0954c-0a94-4301-b744-7c1e5c90e000fileName">C819314---Validate-%22createdTimeUTC%22-field</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="restrequest" name="Step1_GetProcessorPerformance_Request" id="69df7651-83aa-4466-acbb-5f7ff2612aa4"><con:settings/><con:config service="ProcessorAPI" resourcePath="/performance/v1/endpoint/{machineId}/processor" methodName="GET - GetProcessorPerfByMachineId" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Step1_GetProcessorPerformance_Request" id="d14a6b99-540e-4de8-90b7-f16136c412b4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#ServerHost}</con:endpoint><con:request/><con:originalUri>http://localhost/performance/v1/endpoint/1/processor</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="170aecaf-4cdb-4da5-8467-3da3837d2c00" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/><con:parameterOrder><con:entry>machineId</con:entry></con:parameterOrder><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="7021bd04-bcf4-458e-b990-05d6a8a5d6e1"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Step2_Validate_createTimeUTC_Field" id="c1ad3b53-70bb-4b61-a271-cc96f77361a0"><con:settings/><con:config><script>import groovy.json.JsonSlurper
+import java.text.SimpleDateFormat
+
+def response = context.expand('${Step1_GetProcessorPerformance_Request#Response}')
+def jsonResponse = new JsonSlurper().parseText(response)
+
+for (int i = 0; i &lt; jsonResponse.size(); i++) {
+	def createTimeUTC = jsonResponse[i].createTimeUTC
+	assert jsonResponse[i].containsKey('createTimeUTC'), "createTimeUTC field not found"
+	assert createTimeUTC.trim() != "", "createTimeUTC field is empty"
+
+	def dateTimeFormatStr = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+	SimpleDateFormat sdf = new SimpleDateFormat(dateTimeFormatStr);
+	boolean isValidDate = false;
+	try {
+		sdf.parse(createTimeUTC)
+		isValidDate = true;
+	} catch (Exception ex) {}
+	assert isValidDate, "createTimeUTC is not in format: " + dateTimeFormatStr
+	}</script></con:config></con:testStep><con:properties/><con:reportParameters/><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

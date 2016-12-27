@@ -1,0 +1,7 @@
+C816729---Validate-REST-endpoint.xml
+C816730---Validate-REST-response---Should-contain-all-the-fields.xml
+C816731---Validate-%22metric%22-part-of-REST-response---Should-contain-all-the-fields.xml
+C816732---Validate-%22cpus%22-part-of-REST-response---Should-contain-all-the-fields.xml
+C816733---Validate-%22cpus-%3E-metric%22-part-of-REST-response---Should-contain-all-the-fields.xml
+C816734---Validate-%22cpus-%3E-cores%22-part-of-REST-response---Should-contain-all-the-fields.xml
+C816739---Validate-%22cpus-%3E-cores-%3E-metric%22-part-of-REST-response---Should-contain-all-the-fields.xml

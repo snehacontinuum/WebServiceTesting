@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:interface xsi:type="con:RestService" id="39c661a8-34ec-4e0a-a637-105a12f619fa" wadlVersion="http://wadl.dev.java.net/2009/02" name="ProcessorAPI" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.rest.actions.service.Wadl2JavaAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Automatic Package Names" value="false"/>
+  <con:entry key="Output Directory" value="/home/vishal/Desktop/wadl2java"/>
+  <con:entry key="JAXB Customization File(s)" value=""/>
+  <con:entry key="Java Args" value=""/>
+  <con:entry key="Package" value="com.girnarsoft"/>
+  <con:entry key="Tool Args" value=""/>
+</xml-fragment>]]></con:setting><con:setting id="39c661a8-34ec-4e0a-a637-105a12f619fafileName">ProcessorAPI</con:setting></con:settings><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:8082</con:endpoint><con:endpoint>http://localhost:8088/</con:endpoint><con:endpoint>http://localhost:8089/</con:endpoint></con:endpoints><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:interface>

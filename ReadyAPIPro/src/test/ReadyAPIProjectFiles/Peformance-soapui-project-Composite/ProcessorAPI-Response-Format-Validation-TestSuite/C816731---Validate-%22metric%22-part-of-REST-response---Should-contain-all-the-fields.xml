@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="cf620cfd-791c-4213-b345-f9009a087e77" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="C816731 - Validate &quot;metric&quot; part of REST response - Should contain all the fields" searchProperties="true" timeout="0" maxResults="0" xmlns:con="http://eviware.com/soapui/config"><con:description>TestCase generated for REST Resource [Processor] located at [/performance/v1/endpoint/{machineId}/processor]</con:description><con:settings><con:setting id="cf620cfd-791c-4213-b345-f9009a087e77fileName">C816731---Validate-%22metric%22-part-of-REST-response---Should-contain-all-the-fields</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="restrequest" name="Step1_GetProcessorPerformance_Request" id="50c14984-ede7-44a3-81a9-8471cb7a38ed"><con:settings/><con:config service="ProcessorAPI" resourcePath="/performance/v1/endpoint/{machineId}/processor" methodName="GET - GetProcessorPerfByMachineId" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Step1_GetProcessorPerformance_Request" id="d14a6b99-540e-4de8-90b7-f16136c412b4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#ServerHost}</con:endpoint><con:request/><con:originalUri>http://localhost/performance/v1/endpoint/1/processor</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="3bae4d4d-0366-4d59-8d67-03dabeb0f8da" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/><con:parameterOrder><con:entry>machineId</con:entry></con:parameterOrder><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="7021bd04-bcf4-458e-b990-05d6a8a5d6e1"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Step2_Validate_metric_Field_Format" id="eedbf64e-958f-4bcb-b7f9-8deb763a8e95"><con:settings/><con:config><script>import groovy.json.JsonSlurper
+
+def response = context.expand('${Step1_GetProcessorPerformance_Request#Response}')
+def jsonResponse = new JsonSlurper().parseText(response)
+
+assert jsonResponse.size() > 0, "Response is empty"
+for (int i = 0; i &lt; jsonResponse.size(); i++) {
+	def jsonObj = jsonResponse[i]
+	assert jsonObj.containsKey("metric"), "metric not found in response"
+	def metricJsonObj = jsonObj.metric
+	assert metricJsonObj.containsKey("numOfProcesses"), "numOfProcesses not found in response"
+	assert metricJsonObj.containsKey("percentIOTime"), "percentIOTime not found in response"
+	assert metricJsonObj.containsKey("percentIdleTime"), "percentIdleTime not found in response"
+	assert metricJsonObj.containsKey("percentInterruptTime"), "percentInterruptTime not found in response"
+	assert metricJsonObj.containsKey("percentSystemTime"), "percentSystemTime not found in response"
+	assert metricJsonObj.containsKey("percentUserTime"), "percentUserTime not found in response"
+	assert metricJsonObj.containsKey("percentUtil"), "percentUtil not found in response"
+	assert metricJsonObj.containsKey("interruptsPerSec"), "interruptsPerSec not found in response"
+	}</script></con:config></con:testStep><con:properties/><con:reportParameters/><con:breakPoints><con:testStepId>50c14984-ede7-44a3-81a9-8471cb7a38ed</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

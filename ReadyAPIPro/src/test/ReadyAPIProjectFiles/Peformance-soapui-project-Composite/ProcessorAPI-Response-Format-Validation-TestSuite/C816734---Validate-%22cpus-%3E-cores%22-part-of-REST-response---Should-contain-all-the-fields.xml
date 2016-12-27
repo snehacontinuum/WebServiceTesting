@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="f7899e12-ef4a-4008-8d2e-cdf88403838f" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="C816734 - Validate &quot;cpus > cores&quot; part of REST response - Should contain all the fields" searchProperties="true" timeout="0" maxResults="0" xmlns:con="http://eviware.com/soapui/config"><con:description>TestCase generated for REST Resource [Processor] located at [/performance/v1/endpoint/{machineId}/processor]</con:description><con:settings><con:setting id="f7899e12-ef4a-4008-8d2e-cdf88403838ffileName">C816734---Validate-%22cpus-%3E-cores%22-part-of-REST-response---Should-contain-all-the-fields</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="restrequest" name="Step1_GetProcessorPerformance_Request" id="faa5472d-8e95-49a6-b175-1e91413ae597"><con:settings/><con:config service="ProcessorAPI" resourcePath="/performance/v1/endpoint/{machineId}/processor" methodName="GET - GetProcessorPerfByMachineId" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Step1_GetProcessorPerformance_Request" id="d14a6b99-540e-4de8-90b7-f16136c412b4" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>${#Project#ServerHost}</con:endpoint><con:request/><con:originalUri>http://localhost/performance/v1/endpoint/1/processor</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="c39ac1b0-4575-4d18-8751-75d061b20b05" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/><con:parameterOrder><con:entry>machineId</con:entry></con:parameterOrder><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="7021bd04-bcf4-458e-b990-05d6a8a5d6e1"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:restRequest></con:config></con:testStep><con:testStep type="groovy" name="Step2_Validate_cpus_cores_Field_Format" id="09d931b8-16a9-4cdf-8896-f5276b237637"><con:settings/><con:config><script>import groovy.json.JsonSlurper
+
+def response = context.expand('${Step1_GetProcessorPerformance_Request#Response}')
+def jsonResponse = new JsonSlurper().parseText(response)
+
+assert jsonResponse.size() > 0, "Response is empty"
+for (int i = 0; i &lt; jsonResponse.size(); i++) {
+	def jsonObj = jsonResponse[i]
+
+	assert jsonObj.containsKey("cpus"), "cpus not found in response"
+	def cpusJsonArr = jsonObj.cpus
+
+	for (int j = 0; j &lt; cpusJsonArr.size(); j++) {
+			assert cpusJsonArr[j].containsKey("cores"), "cores not found"
+			def coresJsonArr = cpusJsonArr[j].cores
+
+			assert coresJsonArr.size() > 0, "cores field is empty"
+			for (int k = 0; k &lt; coresJsonArr.size(); k++) {
+
+				assert coresJsonArr[k].containsKey("createTimeUTC"), "createTimeUTC not found in response"
+				assert coresJsonArr[k].containsKey("createdBy"), "createdBy not found in response"
+				assert coresJsonArr[k].containsKey("index"), "index not found in response"
+				assert coresJsonArr[k].containsKey("name"), "name not found in response"
+				assert coresJsonArr[k].containsKey("metric"), "metric not found in response"
+				assert coresJsonArr[k].containsKey("type"), "type not found in response"
+				}
+		}
+	}</script></con:config></con:testStep><con:properties/><con:reportParameters/><con:environmentSpec><con:entry environmentId="8eef0a7c-3706-4628-b66b-dc2fb662e155"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>
